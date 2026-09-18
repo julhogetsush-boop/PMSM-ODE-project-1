@@ -1,4 +1,4 @@
-# MTH321 · PMSM 项目前两周学习与代码
+# MTH321 · PMSM week1&2
 
 针对图片中 **Mathematical Theory（A、B）** 的阶段资料：中文课程 notes、PMSM 数学推导、Python 实验、实际运行结果、大四学生层面的理解与答辩准备。
 
