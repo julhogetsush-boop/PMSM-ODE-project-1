@@ -1,0 +1,10 @@
+h_ms,full_max_updates,full_passes_10,damped_max_updates,damped_passes_10
+0.1,6,True,5,True
+0.2,9,True,5,True
+0.4,14,False,6,True
+0.8,14,False,7,True
+1,21,False,6,True
+2,53,False,5,True
+4,89,False,8,True
+8,121,False,8,True
+20,150,False,8,True

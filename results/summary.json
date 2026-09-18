@@ -1,0 +1,130 @@
+{
+  "checks": {
+    "status": "PASS",
+    "radau_vs_matrix_exponential_max_A": 4.987121826616203e-13,
+    "checks": "equilibrium; Jf/JF finite differences; direct implicit solve; scalar amplification; stage time; endpoint; decoupled oracle; rejection; failure reporting; invalid h"
+  },
+  "project": {
+    "parameters": {
+      "description": "Illustrative teaching parameters, not measured motor data and not taken from PMSM_Project1_Report.pdf.",
+      "R": 0.5,
+      "Ld": 0.003,
+      "Lq": 0.004,
+      "psi_f": 0.05,
+      "omega_e": 1000.0,
+      "ud": 0.0,
+      "uq": 60.0,
+      "y0": [
+        0.0,
+        0.0
+      ],
+      "T": 0.03
+    },
+    "equilibrium_A": [
+      3.265306122448979,
+      0.40816326530612246
+    ],
+    "jacobian_per_s": [
+      [
+        -166.66666666666666,
+        1333.3333333333333
+      ],
+      [
+        -750.0,
+        -125.0
+      ]
+    ],
+    "eigenvalues_per_s": [
+      [
+        -145.83333333333331,
+        999.7829625584855
+      ],
+      [
+        -145.83333333333331,
+        -999.7829625584855
+      ]
+    ],
+    "euler_h_boundary_s": 0.00028571428571428584,
+    "rk4_h_boundary_s": 0.0029296218977737975,
+    "decay_rate_ratio": 1.0,
+    "observed_orders_last3": {
+      "euler": 1.0274831097169181,
+      "rk4": 4.00175790642521,
+      "implicit": 0.9731859918521741
+    },
+    "adaptive": [
+      {
+        "rtol": 0.001,
+        "atol_A": 1e-05,
+        "accepted": 485,
+        "rejected": 68,
+        "rhs_calls_including_rejects": 3318,
+        "h_min_s": 2.4000000000000007e-06,
+        "h_max_s": 0.0003827478687361687,
+        "max_accepted_local_ratio": 0.9991650941711887,
+        "max_grid_Linf_global_error_A": 0.11303303653509644,
+        "endpoint_Linf_error_A": 0.01912382123745837
+      },
+      {
+        "rtol": 0.0001,
+        "atol_A": 1e-06,
+        "accepted": 1492,
+        "rejected": 40,
+        "rhs_calls_including_rejects": 9192,
+        "h_min_s": 9.863075186472364e-07,
+        "h_max_s": 0.0001583690661706585,
+        "max_accepted_local_ratio": 0.9932721770204483,
+        "max_grid_Linf_global_error_A": 0.03750728970277173,
+        "endpoint_Linf_error_A": 0.007690251293990036
+      },
+      {
+        "rtol": 1e-05,
+        "atol_A": 1.0000000000000001e-07,
+        "accepted": 4714,
+        "rejected": 6,
+        "rhs_calls_including_rejects": 28320,
+        "h_min_s": 3.1180134059004306e-07,
+        "h_max_s": 4.666489632676431e-05,
+        "max_accepted_local_ratio": 0.996974795770091,
+        "max_grid_Linf_global_error_A": 0.011966428168071808,
+        "endpoint_Linf_error_A": 0.0026752139113518925
+      }
+    ],
+    "synthetic_stiff_case": {
+      "decay_ratio": 200,
+      "euler_h_boundary_s": 0.0004,
+      "description": "Deliberate numerical stress test; not measured motor data"
+    },
+    "pmsm_first_step_newton_updates": 1
+  },
+  "course_labs": {
+    "logistic_order_last3": 0.9807959805033564,
+    "vdp_week1_y1_T": -1.4281535682793465,
+    "vdp_week1_reference_gap": 3.079341226452925e-10,
+    "vdp_week1_order_prescribed4": 0.9830541008897837,
+    "vdp_failure_last_t": 1.3,
+    "vdp_failure_peak_state": 6650275.3005917715,
+    "vdp_failure_reference_gap": 2.728732795276301e-10,
+    "robertson_mass_error": 4.440892098500626e-16,
+    "robertson_endpoint_error_max": 0.00034789936321838466,
+    "robertson_reference_gap": 7.268741164523362e-12,
+    "rc_first_step_full_updates": 21,
+    "rc_first_step_full_root": [
+      1.8618827356264236,
+      0.5856482068792705
+    ],
+    "rc_first_step_damped_updates": 6,
+    "rc_first_step_damped_root": [
+      1.861882735626003,
+      0.5856482068780089
+    ],
+    "rc_full_hmax_ms": 0.2,
+    "rc_damped_hmax_ms": 20
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.0",
+    "matplotlib": "3.11.1"
+  }
+}

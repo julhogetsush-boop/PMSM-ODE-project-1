@@ -1,0 +1,12 @@
+{
+  "description": "Illustrative teaching parameters, not measured motor data and not taken from PMSM_Project1_Report.pdf.",
+  "R": 0.5,
+  "Ld": 0.003,
+  "Lq": 0.004,
+  "psi_f": 0.05,
+  "omega_e": 1000.0,
+  "ud": 0.0,
+  "uq": 60.0,
+  "y0": [0.0, 0.0],
+  "T": 0.03
+}
