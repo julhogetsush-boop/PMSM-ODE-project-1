@@ -1,0 +1,14 @@
+{
+  "feedback_item": "Convergence plot missing theoretical slope, uncertainty, and round-off annotation",
+  "method": "RK4",
+  "error_metric": "endpoint componentwise L-infinity current error [A]",
+  "fit_N_min": 120,
+  "fit_N_max": 7680,
+  "fit_h_max_s": 0.00025,
+  "fit_h_min_s": 3.90625e-06,
+  "slope": 4.0375549204642605,
+  "slope_standard_error": 0.009076806852539396,
+  "roundoff_boundary_h_s": 9.765625e-07,
+  "smallest_reported_error_A": 1.2156942119645464e-14,
+  "band_interpretation": "deterministic regression diagnostic, not repeated-sample uncertainty"
+}
