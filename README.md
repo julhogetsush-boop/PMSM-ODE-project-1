@@ -157,10 +157,6 @@ python code/week4_reproduction.py --require-clean-commit --expected-commit YOUR_
 
 严格模式验证HEAD、源码跟踪与干净状态。尚无真实提交时，普通运行明确记录 `PENDING_REAL_COMMIT`；源码哈希补充记录内容，不替代提交历史。
 
-## GitHub上传和最终提交
 
-将本文件夹内容作为一个仓库根目录，或合入既有仓库的相应目录。README、参数、代码、笔记、图表、CSV/JSON和报告素材一起上传；原始教材、虚拟环境、依赖安装目录和缓存无需加入。生成的复现证据文件被`.gitignore`忽略，可另存作课程记录。
-
-填写真实的 [AI辅助与人工复核记录](AI_Transparency_Log.md) 和ICS，并按统一检查表核对正式报告PDF、展示PDF、真实Git记录与课程提交状态。本项目文件夹提供四周学习和实验的完整材料；正式报告和展示文件仍需据最终项目内容完成。
 
 `report/week4_math_appendix.tex`为可编辑数学附录。内置编译器此前返回平台环境错误，当前未确认PDF编译/排版；请在可用的LaTeX环境中验证。修改参数后，重新审查所有图、报告段落、附录数值表及`report_claims.json`，避免沿用旧数字。
