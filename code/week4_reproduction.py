@@ -182,7 +182,7 @@ def write_report(cost, math_review, reproduced):
              f"Lyapunov 恒等式数值缺陷：{math_review['lyapunov_identity_max_defect']:.3e}。",
              '', 'Git commit、运行版本、源码哈希和命令见 `results/week4_reproduction.json`。'
              '未建立真实提交时，Git 状态会明确显示 PENDING_REAL_COMMIT。']
-    (ROOT / 'notes/04_Week4_实际运行结果.md').write_text('\n'.join(rows)+'\n', encoding='utf-8')
+    (ROOT / 'notes/09_复现与成本运行结果.md').write_text('\n'.join(rows)+'\n', encoding='utf-8')
     english = ['# Week 4 reproduction and cost evidence', '',
         f"For the documented illustrative PMSM case, the RK4 endpoint-order estimate was "
         f"recomputed as {numbers['rk4_endpoint_order']['actual']:.16g}, matching the report "

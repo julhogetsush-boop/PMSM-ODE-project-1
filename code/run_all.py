@@ -221,7 +221,7 @@ def write_result_note(summary):
               "", "![Robertson](../figures/lab_robertson.png)", "", "轨迹比较与质量缺陷并列，说明守恒检查不能代替独立参考解。",
               "", "![RC Newton](../figures/lab_rc_newton.png)", "", "阻尼减少首步过冲；横轴是 Newton 修正次数，不是物理时间。完整迭代表见 results/lab_rc_step_sweep.csv。",
               "", "## 验证范围", "", "所有输出由本次代码实际计算；完整设置和软件版本见 results/summary.json。数值验证只覆盖这些算例，不声称证明任意非线性系统的稳定性或任意参数下的正确性。学生本人应复跑并填写自己的理解、修改和真实贡献记录。"]
-    (ROOT/"notes/05_运行结果.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
+    (ROOT/"notes/08_基础实验运行结果.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
 
 
 def main():

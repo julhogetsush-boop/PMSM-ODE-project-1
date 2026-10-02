@@ -1,24 +1,24 @@
 {
   "status": "PASS",
-  "timestamp_utc": "2026-10-02T04:55:16.093027+00:00",
+  "timestamp_utc": "2026-10-02T05:19:48.397813+00:00",
   "command": "python code/run_all.py",
   "git": {
     "status": "PENDING_REAL_COMMIT",
     "commit": null
   },
   "source_snapshot": {
-    "sha256": "c8f5d71ef142d94adeecfff546dd2e50d6364017ff4225be6284f621b789294b",
+    "sha256": "ae03926f12c11400de6c283cc43e7b71dd5e7f3a738f55795b10e1c86e08c730",
     "files": {
       "code/checks.py": "5a5884c15c07c8a54d5a18a72b022bd2c15498105e27b7ef9ef3826270c3e334",
       "code/course_labs.py": "3bf08bcffa28c050be27b6e1fa343488ffc006dcab9f01c01ac56e9f44b1a736",
       "code/methods.py": "5ff75b2834e7341595dab3e41ff9ca90607f9c260c5c25f79c979ae068802194",
       "code/model.py": "c9d2633ca3ca9b6e1639423c4c8bf144bf34b45688f7cd4532623b5693616631",
-      "code/run_all.py": "cb26eca05ce49c11eb498dcdb2bc30a139bfaf934f7f6e9993be50a0344e8afc",
+      "code/run_all.py": "1409b62af2b756cf4c0d4be40d8b90b0f630d477d8e7500600f38230668f6f71",
       "code/week3_review.py": "fe943d33f7343e9e02bb7b043ce38181146ba9f48df85be5bdb78815f5e95b5b",
-      "code/week4_reproduction.py": "6f6cf879be5bad60c200a0b8e253b9ab96c45bdb481ee0aab67a152f635defb2",
+      "code/week4_reproduction.py": "4f259a0910746d641f592dde7701a85d0a0b8bd6e8493647916ade8d55bda59d",
       "parameters.json": "32a9a21814997e8c269f09152477db8adbece03a37cb428c5752a756be4587b7",
       "report/report_claims.json": "c7882c0c0ed5c34d1c0a637506a4ef8ae646d53c51cbc71115501676f75f1dbe",
-      "report/week4_math_appendix.tex": "0905faa809a328dabceb11bf13a41fa74c632ae1eced5176005db835fa3cf7ef",
+      "report/week4_math_appendix.tex": "1abbe84f8902cb5364548ada768dfff6bc304ad324c02788abcb3937f6cb040e",
       "requirements.txt": "84c60e5e3ccde42a44a809296097abf4e93e8fc1bad1abe831361d8620ee61b3"
     }
   },

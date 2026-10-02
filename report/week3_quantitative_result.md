@@ -2,7 +2,7 @@
 
 ## Numerical verification paragraph
 
-We addressed the review finding that the convergence evidence did not identify its theoretical benchmark, fitted uncertainty, or floating-point limit. For the constant-speed PMSM current subsystem, classical RK4 was run to the common final time (T=0.03\,\mathrm{s}) on uniform grids with (h=T/N). The reference value was evaluated independently from the affine system's matrix-exponential solution. We measured the componentwise endpoint error
+We addressed the review finding that the convergence evidence did not identify its theoretical benchmark, fitted uncertainty, or floating-point limit. For the constant-speed PMSM current subsystem, classical RK4 was run to the common final time \(T=0.03\,\mathrm{s}\) on uniform grids with \(h=T/N\). The reference value was evaluated independently from the affine system's matrix-exponential solution. We measured the componentwise endpoint error
 
 \[
 E(h)=\max_{j\in\{d,q\}} |i_{j,h}(T)-i_{j,\mathrm{ref}}(T)|.
@@ -12,7 +12,7 @@ A least-squares fit of \(\log E\) against \(\log h\) over \(120\le N\le7680\) ga
 
 ## Figure caption
 
-**Figure X. RK4 achieves fourth-order convergence before the floating-point floor.** Endpoint (L_\infty) current error is plotted against uniform step size for the illustrative constant-speed PMSM case. The fitted slope is (4.038\pm0.009) on the stated asymptotic range, consistent with the black order-4 reference line. The shaded fine-step region marks non-monotone floating-point behavior and is excluded from the fit. This matters because a fitted slope is credible only when its fitting range and numerical floor are visible.
+**Figure X. RK4 achieves fourth-order convergence before the floating-point floor.** Endpoint \(L_\infty\) current error is plotted against uniform step size for the illustrative constant-speed PMSM case. The fitted slope is \(4.038\pm0.009\) on the stated asymptotic range, consistent with the black order-4 reference line. The shaded fine-step region marks non-monotone floating-point behavior and is excluded from the fit. This matters because a fitted slope is credible only when its fitting range and numerical floor are visible.
 
 ![RK4 quantitative convergence figure](../figures/week3_rk4_quantitative.png)
 
