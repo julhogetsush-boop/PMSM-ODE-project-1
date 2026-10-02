@@ -121,6 +121,201 @@
     "rc_full_hmax_ms": 0.2,
     "rc_damped_hmax_ms": 20
   },
+  "week3": {
+    "feedback_item": "Convergence plot missing theoretical slope, uncertainty, and round-off annotation",
+    "method": "RK4",
+    "error_metric": "endpoint componentwise L-infinity current error [A]",
+    "fit_N_min": 120,
+    "fit_N_max": 7680,
+    "fit_h_max_s": 0.00025,
+    "fit_h_min_s": 3.90625e-06,
+    "slope": 4.0375549204642605,
+    "slope_standard_error": 0.009076806852539396,
+    "roundoff_boundary_h_s": 9.765625e-07,
+    "smallest_reported_error_A": 1.2156942119645464e-14,
+    "band_interpretation": "deterministic regression diagnostic, not repeated-sample uncertainty"
+  },
+  "week4": {
+    "status": "PASS",
+    "timestamp_utc": "2026-10-02T04:55:16.093027+00:00",
+    "command": "python code/run_all.py",
+    "git": {
+      "status": "PENDING_REAL_COMMIT",
+      "commit": null
+    },
+    "source_snapshot": {
+      "sha256": "c8f5d71ef142d94adeecfff546dd2e50d6364017ff4225be6284f621b789294b",
+      "files": {
+        "code/checks.py": "5a5884c15c07c8a54d5a18a72b022bd2c15498105e27b7ef9ef3826270c3e334",
+        "code/course_labs.py": "3bf08bcffa28c050be27b6e1fa343488ffc006dcab9f01c01ac56e9f44b1a736",
+        "code/methods.py": "5ff75b2834e7341595dab3e41ff9ca90607f9c260c5c25f79c979ae068802194",
+        "code/model.py": "c9d2633ca3ca9b6e1639423c4c8bf144bf34b45688f7cd4532623b5693616631",
+        "code/run_all.py": "cb26eca05ce49c11eb498dcdb2bc30a139bfaf934f7f6e9993be50a0344e8afc",
+        "code/week3_review.py": "fe943d33f7343e9e02bb7b043ce38181146ba9f48df85be5bdb78815f5e95b5b",
+        "code/week4_reproduction.py": "6f6cf879be5bad60c200a0b8e253b9ab96c45bdb481ee0aab67a152f635defb2",
+        "parameters.json": "32a9a21814997e8c269f09152477db8adbece03a37cb428c5752a756be4587b7",
+        "report/report_claims.json": "c7882c0c0ed5c34d1c0a637506a4ef8ae646d53c51cbc71115501676f75f1dbe",
+        "report/week4_math_appendix.tex": "0905faa809a328dabceb11bf13a41fa74c632ae1eced5176005db835fa3cf7ef",
+        "requirements.txt": "84c60e5e3ccde42a44a809296097abf4e93e8fc1bad1abe831361d8620ee61b3"
+      }
+    },
+    "versions": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.18.0",
+      "matplotlib": "3.11.1"
+    },
+    "reproduced_claims": [
+      {
+        "id": "rk4_endpoint_order",
+        "label": "RK4 fitted endpoint order",
+        "expected": 4.0375549204642605,
+        "units": "dimensionless",
+        "actual": 4.0375549204642605,
+        "expected_3sf": "4.04",
+        "actual_3sf": "4.04",
+        "status": "PASS"
+      },
+      {
+        "id": "euler_stability_ms",
+        "label": "Euler stability boundary",
+        "expected": 0.28571428571428586,
+        "units": "ms",
+        "actual": 0.28571428571428586,
+        "expected_3sf": "0.286",
+        "actual_3sf": "0.286",
+        "status": "PASS"
+      }
+    ],
+    "independent_checks": {
+      "status": "PASS",
+      "radau_vs_matrix_exponential_max_A": 4.987121826616203e-13,
+      "checks": "equilibrium; Jf/JF finite differences; direct implicit solve; scalar amplification; stage time; endpoint; decoupled oracle; rejection; failure reporting; invalid h"
+    },
+    "mathematical_review": {
+      "status": "PASS",
+      "jacobian_per_s": [
+        [
+          -166.66666666666666,
+          1333.3333333333333
+        ],
+        [
+          -750.0,
+          -125.0
+        ]
+      ],
+      "forcing_A_per_s": [
+        0.0,
+        2500.0
+      ],
+      "transformed_jacobian_per_s": [
+        [
+          -166.66666666666666,
+          1000.0
+        ],
+        [
+          -1000.0,
+          -125.0
+        ]
+      ],
+      "lyapunov_matrix": [
+        [
+          -0.003,
+          0.0
+        ],
+        [
+          0.0,
+          -0.004
+        ]
+      ],
+      "lyapunov_identity_max_defect": 0.0,
+      "determinant_per_s2": 1020833.3333333334,
+      "scope": "Global constant-coefficient perturbation result; excludes variable speed and saturation."
+    },
+    "cost_accuracy": {
+      "metric": "RHS evaluations including Newton residual evaluations",
+      "error_metric": "maximum component error on each solver grid versus tight Radau",
+      "targets_A": [
+        0.01,
+        0.005
+      ],
+      "matched": [
+        {
+          "target_error_A": 0.01,
+          "method": "euler",
+          "N": 15360,
+          "h_s": 1.953125e-06,
+          "max_grid_component_error_A": 0.008276884610643354,
+          "rhs_evaluations": 15360,
+          "jacobian_evaluations": 0,
+          "newton_updates": 0,
+          "steps": 15360
+        },
+        {
+          "target_error_A": 0.005,
+          "method": "euler",
+          "N": 30720,
+          "h_s": 9.765625e-07,
+          "max_grid_component_error_A": 0.004131948847720945,
+          "rhs_evaluations": 30720,
+          "jacobian_evaluations": 0,
+          "newton_updates": 0,
+          "steps": 30720
+        },
+        {
+          "target_error_A": 0.01,
+          "method": "rk4",
+          "N": 60,
+          "h_s": 0.0005,
+          "max_grid_component_error_A": 0.004730345623136678,
+          "rhs_evaluations": 240,
+          "jacobian_evaluations": 0,
+          "newton_updates": 0,
+          "steps": 60
+        },
+        {
+          "target_error_A": 0.005,
+          "method": "rk4",
+          "N": 60,
+          "h_s": 0.0005,
+          "max_grid_component_error_A": 0.004730345623136678,
+          "rhs_evaluations": 240,
+          "jacobian_evaluations": 0,
+          "newton_updates": 0,
+          "steps": 60
+        },
+        {
+          "target_error_A": 0.01,
+          "method": "implicit",
+          "N": 15360,
+          "h_s": 1.953125e-06,
+          "max_grid_component_error_A": 0.0082251068378556,
+          "rhs_evaluations": 30720,
+          "jacobian_evaluations": 15360,
+          "newton_updates": 15360,
+          "steps": 15360
+        },
+        {
+          "target_error_A": 0.005,
+          "method": "implicit",
+          "N": 30720,
+          "h_s": 9.765625e-07,
+          "max_grid_component_error_A": 0.004119004426845985,
+          "rhs_evaluations": 61440,
+          "jacobian_evaluations": 30720,
+          "newton_updates": 30720,
+          "steps": 30720
+        }
+      ],
+      "minimum_rhs_method": {
+        "0.01": "rk4",
+        "0.005": "rk4"
+      },
+      "selection": "first qualifying grid in a powers-of-two sweep; shared accuracy ceilings, not equal errors",
+      "excluded_cost": "Jacobian assembly, linear solves, setup, reference solve, plotting; no CPU-time claim"
+    },
+    "course_submission_status": "Pending real team report/slides, personal ICS, peer review and PM posts."
+  },
   "versions": {
     "python": "3.12.14",
     "numpy": "2.3.5",

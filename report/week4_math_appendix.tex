@@ -1,0 +1,272 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage{algorithm,algorithmic}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\title{PMSM Project: Week 4 Mathematical Review}
+\author{AI-assisted appendix draft for Mathematical Theory A and B}
+\date{2 October 2026}
+\begin{document}
+\maketitle
+\textbf{Scope.} This standalone appendix is a source for the team's report and viva.
+It uses documented teaching parameters. It is not the complete team report or a
+statement of any student's personal contribution. All final identities, parameters,
+Git evidence and submission records must be checked by the team.
+
+\section{Model, initial data and reference solution}
+The state is $y=(i_d,i_q)^T$. Electrical angular speed $\omega_e$ is supplied externally.
+With constant voltage and coefficients, the current subsystem is
+\begin{align}
+L_d\dot i_d&=u_d-Ri_d+\omega_eL_qi_q,\\
+L_q\dot i_q&=u_q-Ri_q-\omega_e L_di_d-\omega_e\psi_f.
+\end{align}
+Use A, V, $\Omega$, H, Wb and seconds. Electrical speed satisfies
+$\omega_e=p\omega_m$; mechanical rpm cannot be substituted directly.
+The affine IVP is $\dot y=Ay+b$, $y(0)=y_0$, where
+\[
+A=\begin{pmatrix}-R/L_d&\omega_eL_q/L_d\\-\omega_eL_d/L_q&-R/L_q\end{pmatrix},
+\qquad b=\begin{pmatrix}u_d/L_d\\(u_q-\omega_e\psi_f)/L_q\end{pmatrix}.
+\]
+For positive $R,L_d,L_q$, $f(t,y)=Ay+b$ is globally Lipschitz and the IVP has a
+unique solution for all finite times. Solve $Ay^*=-b$ without forming a numerical inverse.
+The exact affine-system formula is
+\[
+y(t)=y^*+\exp(At)(y_0-y^*).
+\]
+The teaching case has $R=0.5$, $L_d=0.003$, $L_q=0.004$, $\psi_f=0.05$,
+$\omega_e=1000$, $u_d=0$, $u_q=60$, $y_0=0$ and $T=0.03$ in SI units.
+The equilibrium is $(3.2653061224,0.4081632653)^T$ A. A tight Radau trajectory and
+the zero-speed decoupled exponential special case provide independent checks.
+
+\newpage
+\section{Continuous perturbation stability}
+The trace and determinant satisfy
+\[
+\operatorname{tr}A=-R(1/L_d+1/L_q)<0,\qquad
+\det A=R^2/(L_dL_q)+\omega_e^2>0.
+\]
+Thus the characteristic roots are
+\[
+\lambda_\pm=-\frac R2(1/L_d+1/L_q)\pm
+\sqrt{\frac{R^2}{4}(1/L_d-1/L_q)^2-\omega_e^2}.
+\]
+For the teaching case these are $-145.8333333\pm999.7829626\,\mathrm{i}$
+$\mathrm{s}^{-1}$. Their equal decay rates do not show a large separation of decay scales.
+The explicit-step restriction can instead be driven by oscillation.
+
+Set $v=y-y^*$, $D=\operatorname{diag}(L_d,L_q)$ and $x=Dv$. Then
+\[
+\dot x=Bx,\qquad B=DAD^{-1}=
+\begin{pmatrix}-R/L_d&\omega_e\\-\omega_e&-R/L_q\end{pmatrix}.
+\]
+With $V=\tfrac12x^Tx$, the skew coupling cancels:
+\begin{align}
+\dot V&=-\frac R{L_d}x_d^2-\frac R{L_q}x_q^2\\
+&=-R(L_dv_d^2+L_qv_q^2)
+\le-2\min(R/L_d,R/L_q)V.
+\end{align}
+Consequently $V(t)\le V(0)\exp[-2\min(R/L_d,R/L_q)t]$.
+The equivalent checked identity, for $P=D^2$, is
+\[
+A^TP+PA=-2R\operatorname{diag}(L_d,L_q).
+\]
+This is a global result for the stated constant-coefficient perturbation system.
+It requires a fresh derivation for variable speed, state-dependent inductance or
+mechanical feedback. The quadratic function is a weighted perturbation measure,
+not the energy of a complete electrical-mechanical motor.
+
+\section{One-step defect and global error}
+Taylor substitution into explicit Euler gives a one-step defect
+$\tfrac12h^2 y''+O(h^3)$. At fixed $T$, a Lipschitz error recursion and discrete
+Gronwall yield global order one. If LTE is defined after dividing the defect by $h$,
+its order is one; state the convention explicitly.
+Classical RK4 has one-step defect $O(h^5)$ and global order four under smoothness
+and stability assumptions. For $v'=Av$, its update is the fourth-degree Taylor
+polynomial of $\exp(hA)$; four function calls alone do not establish fourth order.
+
+\newpage
+\section{Absolute stability and the measured boundary}
+For $u'=\lambda u$, $z=h\lambda$, the stability functions are
+\begin{align}
+\mathcal R_E(z)&=1+z,\\
+\mathcal R_{RK4}(z)&=1+z+z^2/2+z^3/6+z^4/24,\\
+\mathcal R_{IE}(z)&=(1-z)^{-1}.
+\end{align}
+The sets are $|1+z|\le1$, $|\mathcal R_{RK4}(z)|\le1$ and $|1-z|\ge1$,
+respectively. The implicit pole $z=1$ is excluded. Implicit Euler contains the
+left half-plane and damps $|z|\to\infty$ there, but a stable step can remain inaccurate.
+
+For $\lambda=-\alpha+\mathrm{i}\beta$, $\alpha>0$,
+\[
+|1+h\lambda|^2=(1-\alpha h)^2+\beta^2h^2\le1
+\quad\Longrightarrow\quad 0<h\le\frac{2\alpha}{\alpha^2+\beta^2}.
+\]
+The teaching case has $h_E=0.2857142857$ ms; RK4 first exits its stability set
+on the same eigenvalue ray at $2.9296218978$ ms. Equality need not imply decay.
+The saved experiment tests $0.8$ and $1.2$ times each explicit boundary.
+For general nonlinear systems, an $h\lambda(J_f)$ overlay is a local frozen-Jacobian
+diagnostic. The stronger constant-matrix statement here concerns powers of
+$\mathcal R(hA)$, not a proof for arbitrary nonlinear trajectories.
+
+\section{Newton residual and local adaptivity}
+For implicit Euler the new state is a root of
+\[
+F(w)=w-y_n-hf(t_n+h,w),\qquad J_F=I-hJ_f(t_n+h,w).
+\]
+Solve $J_F\Delta=-F$, then update $w\leftarrow w+\Delta$. The implemented residual
+tolerance is $10^{-12}$ in current units. This affine model needs one exact-arithmetic
+Newton correction; that observation does not test nonlinear quadratic convergence.
+
+With one coarse step and two half steps, the fine-step error estimate is
+$(y_f-y_c)/(2^p-1)$. Here $p=1$, so the denominator is one. The acceptance ratio is
+\[
+E=\max_j\frac{|y_{f,j}-y_{c,j}|}
+{\mathrm{atol}_j+\mathrm{rtol}\max(|y_{n,j}|,|y_{f,j}|)}.
+\]
+Only $E\le1$ accepts the two-half-step state. Rejection preserves the old time
+and state. The controller uses safety factor $0.9$, exponent $-1/2$, and bounded
+step ratios. Local control is not a bound on accumulated global error.
+
+\newpage
+\section{Reproduction and measured cost}
+The recorded endpoint error is
+\[
+E(h)=\max_{j\in\{d,q\}}|i_{j,h}(T)-i_{j,\mathrm{ref}}(T)|.
+\]
+The fit of $\log E$ to $\log h$ over $120\le N\le7680$ gives
+$4.0375549205$ with slope standard error $0.0090768069$. This is $4.04$ to three
+significant digits, and $4.038\pm0.009$ in the figure's decimal display.
+The very finest points are excluded because floating-point error becomes non-monotone.
+The regression band is a deterministic fit diagnostic, not repeated-sample uncertainty.
+
+\texttt{python code/week4\_reproduction.py} recomputes the values, compares them
+with \texttt{report/report\_claims.json}, and writes the matching lines.
+Its strict mode checks a real expected Git commit, source tracking and a clean
+folder before running. A content hash complements the commit; it does not replace it.
+
+The matched-accuracy study imposes shared maximum sampled error ceilings against
+tight Radau ($\mathrm{rtol}=10^{-12}$, $\mathrm{atol}=10^{-14}$).
+The first qualifying grid in a powers-of-two refinement sequence is selected.
+The measured values for the teaching case are:
+\begin{center}
+\begin{tabular}{llrrr}\toprule
+Target [A]&Method&$N$&Error [A]&RHS calls\\\midrule
+0.01&Euler&15360&0.00827688&15360\\
+0.01&RK4&60&0.00473035&240\\
+0.01&Implicit Euler&15360&0.00822511&30720\\
+0.005&Euler&30720&0.00413195&30720\\
+0.005&RK4&60&0.00473035&240\\
+0.005&Implicit Euler&30720&0.00411900&61440\\\bottomrule
+\end{tabular}
+\end{center}
+RHS counts include Newton residual evaluations. Jacobian calls and Newton updates
+are reported separately. Linear solves, reference construction, setup and plotting
+are excluded; no wall-clock ranking is claimed. These are shared error ceilings,
+not exactly equal attained errors. Errors are measured on each solver grid,
+not proven maxima between nodes. Recompute this table if final parameters change.
+
+\section{References and report integration}
+The mathematical conventions follow the supplied Lecture 1 and Lecture 2 materials
+and the Project 1 pseudocode handout. Reproduction and final verification follow
+Tutorial 4, the Project Brief and the Submission Checklist. General numerical
+analysis background is available in D. F. Griffiths and D. J. Higham,
+\emph{Numerical Methods for Ordinary Differential Equations: Initial Value Problems},
+Springer, 2010 (provided course copy).
+The final team report must cite the actual editions/materials used, attach a team
+AI log and one labelled, genuine ICS per member, and satisfy the minimum eight-page
+requirement. This mathematical appendix is only part of that report.
+
+\newpage
+\section{Pseudocode matching the implementation}
+The following uses the \texttt{algorithmic} package, assignment arrows, mathematical
+subscripts and one statement per line. The last step is shortened to reach $T$.
+\begin{algorithm}[H]
+\caption{Explicit Euler with endpoint handling}
+\begin{algorithmic}[1]
+\REQUIRE $f,y_0,t_0,T,h$ with $t_0<T$, $h>0$
+\STATE $t\leftarrow t_0$
+\STATE $y\leftarrow y_0$
+\WHILE{$t<T$}
+\STATE $s\leftarrow\min(h,T-t)$
+\STATE $y\leftarrow y+s f(t,y)$
+\STATE $t\leftarrow t+s$
+\ENDWHILE
+\STATE \textbf{return} $y$
+\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[H]
+\caption{One classical RK4 step}
+\begin{algorithmic}[1]
+\REQUIRE $f,t,y,h$
+\STATE $k_1\leftarrow f(t,y)$
+\STATE $k_2\leftarrow f(t+h/2,y+hk_1/2)$
+\STATE $k_3\leftarrow f(t+h/2,y+hk_2/2)$
+\STATE $k_4\leftarrow f(t+h,y+hk_3)$
+\STATE $w\leftarrow y+h(k_1+2k_2+2k_3+k_4)/6$
+\STATE \textbf{return} $w$
+\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[H]
+\caption{Implicit Euler via Newton; residual tolerance $10^{-12}$ A}
+\begin{algorithmic}[1]
+\REQUIRE $f,J_f,t,y,h,\mathrm{tol},\mathrm{maxiter}$
+\STATE $w\leftarrow y$
+\FOR{$k=0,\ldots,\mathrm{maxiter}$}
+\STATE $F\leftarrow w-y-h f(t+h,w)$
+\IF{$\|F\|_\infty<\mathrm{tol}$}
+\STATE \textbf{return} $w$
+\ENDIF
+\IF{$k=\mathrm{maxiter}$}
+\STATE \textbf{raise} Newton failure
+\ENDIF
+\STATE $J_F\leftarrow I-hJ_f(t+h,w)$
+\STATE $\Delta\leftarrow\operatorname{solve}(J_F,-F)$
+\STATE $w\leftarrow w+\Delta$
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\newpage
+\begin{algorithm}[H]
+\caption{Adaptive implicit Euler; accept two half steps, $p=1$}
+\begin{algorithmic}[1]
+\REQUIRE $f,J_f,t_0,T,y_0,h_0,\mathrm{atol},\mathrm{rtol}$
+\STATE $t\leftarrow t_0$
+\STATE $y\leftarrow y_0$
+\STATE $h\leftarrow h_0$
+\WHILE{$t<T$}
+\STATE $h\leftarrow\min(h,T-t)$
+\STATE $y_c\leftarrow\operatorname{ImplicitStep}(t,y,h)$
+\STATE $y_m\leftarrow\operatorname{ImplicitStep}(t,y,h/2)$
+\STATE $y_f\leftarrow\operatorname{ImplicitStep}(t+h/2,y_m,h/2)$
+\STATE $s_j\leftarrow\mathrm{atol}_j+\mathrm{rtol}\max(|y_j|,|y_{f,j}|)$
+\STATE $E\leftarrow\max_j|y_{f,j}-y_{c,j}|/s_j$
+\IF{$E\le1$}
+\STATE $t\leftarrow t+h$
+\STATE $y\leftarrow y_f$
+\ENDIF
+\IF{$E=0$}
+\STATE $q\leftarrow2$
+\ELSE
+\STATE $q\leftarrow\min(2,\max(0.2,0.9E^{-1/2}))$
+\ENDIF
+\IF{$E>1$}
+\STATE $q\leftarrow\min(0.5,q)$
+\ENDIF
+\STATE $h\leftarrow hq$
+\ENDWHILE
+\STATE \textbf{return} accepted times and states
+\end{algorithmic}
+\end{algorithm}
+On Newton failure, the implementation records the failed trial, leaves $t,y$
+unchanged, and shrinks $h$ with the minimum rejection factor. It also enforces
+a minimum step and a maximum trial count. The pseudocode displays the successful
+trial path; these safeguards remain part of the runnable implementation.
+
+\textbf{Final viva check.} Derive one stability bound without code; explain the
+state units; distinguish algebraic, local and global errors; reproduce a reported
+number from the agreed commit; and identify the costs excluded from the efficiency
+comparison. Each student records their own work and evidence.
+\end{document}

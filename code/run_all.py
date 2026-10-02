@@ -16,6 +16,8 @@ from model import (load_parameters, matrices, make_model, equilibrium,
 from methods import solve_fixed, adaptive_implicit, implicit_step
 from checks import run_checks
 from course_labs import run_labs, save_csv, save_figure
+from week3_review import run_week3
+from week4_reproduction import run_week4
 
 ROOT = Path(__file__).resolve().parents[1]
 METHODS = ["euler", "rk4", "implicit"]
@@ -233,15 +235,20 @@ def main():
     project = run_project(figures,results)
     print("Running Week 1-2 classroom examples...",flush=True)
     labs = run_labs(figures,results)
-    summary = {"checks":checks,"project":project,"course_labs":labs,
+    print("Running Tutorial 3 quantitative review...",flush=True)
+    week3 = run_week3(figures,results)
+    print("Running Tutorial 4 reproduction, mathematical review and matched-accuracy cost...",flush=True)
+    week4 = run_week4(week3=week3, checks=checks, command='python code/run_all.py')
+    summary = {"checks":checks,"project":project,"course_labs":labs,"week3":week3,"week4":week4,
                "versions":{"python":platform.python_version(),"numpy":np.__version__,
                            "scipy":scipy.__version__,"matplotlib":matplotlib.__version__}}
     (results/"summary.json").write_text(json.dumps(summary,indent=2,ensure_ascii=False,allow_nan=False),encoding="utf-8")
     write_result_note(summary)
-    print("PASS. All figures, CSV tables, summary.json and the result note regenerated.")
+    print("PASS. Weeks 1-4 figures, tables, summary.json and result notes regenerated.")
     print("Observed orders:",project["observed_orders_last3"])
     print("Euler / RK4 stability boundaries (ms):",project["euler_h_boundary_s"]*1000,project["rk4_h_boundary_s"]*1000)
     print("RC first-step Newton updates:",labs["rc_first_step_full_updates"],labs["rc_first_step_damped_updates"])
+    print("Week 3 RK4 slope +/- SE:",week3["slope"],week3["slope_standard_error"])
 
 
 if __name__ == "__main__":

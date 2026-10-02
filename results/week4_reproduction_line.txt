@@ -1,0 +1,2 @@
+REPRODUCED rk4_endpoint_order: report=4.04; run=4.04; units=dimensionless; PASS
+REPRODUCED euler_stability_ms: report=0.286; run=0.286; units=ms; PASS

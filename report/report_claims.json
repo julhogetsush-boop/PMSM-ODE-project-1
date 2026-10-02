@@ -1,0 +1,7 @@
+{
+  "description": "Values quoted in the supplied teaching-case report draft. Update only after changing the model and reviewing new experiments.",
+  "claims": [
+    {"id": "rk4_endpoint_order", "label": "RK4 fitted endpoint order", "expected": 4.0375549204642605, "units": "dimensionless"},
+    {"id": "euler_stability_ms", "label": "Euler stability boundary", "expected": 0.28571428571428584, "units": "ms"}
+  ]
+}
